@@ -1,0 +1,34 @@
+# Project: AQNU
+# Makefile created by Red Panda C++ 1.0.4
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = AQNU_private.res
+OBJ      = main.o $(RES)
+LINKOBJ  = main.o $(RES)
+CLEANOBJ  =  main.o AQNU_private.res AQNU.exe
+LIBS     =  -s -static
+INCS     =  
+CXXINCS  =  
+BIN      = AQNU.exe
+CXXFLAGS = $(CXXINCS)  -O2 -pipe
+CFLAGS   = $(INCS)  -O2 -pipe
+RM       = del /q /f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(CLEANOBJ) > NUL 2>&1
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp
+	$(CPP) -c C:/Cprog/AQNU/main.cpp -o main.o $(CXXFLAGS) 
+
+AQNU_private.res: AQNU_private.rc 
+	$(WINDRES) -i AQNU_private.rc --input-format=rc -o AQNU_private.res -O coff 
+
